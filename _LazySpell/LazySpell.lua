@@ -398,7 +398,13 @@ function LazySpell:CM_CastSpell(spell, unit)
 end
 
 function LazySpell:LunaUF_CastSpellByName_IgnoreSelfCast(spell, unit)
+	self:Debug("LUNA CastSpellByName_IgnoreSelfCast")
 	if not ( type(spell) == "function") then
+		local lunit = (LunaUF.db.profile.mouseover and UnitExists("mouseover") and "mouseover") or (GetMouseFocus() and GetMouseFocus().unit)
+		local rosterUnit = lunit and LunaUF.roster:GetUnitIDFromUnit(lunit)
+		unit = unit or rosterUnit or lunit
+	
+	
 		local s,_,_,_,r = SC:GetSpellData(spell)
 		if s and HealComm.Spells[s] and r == 1 then
 			local rank = LazySpell:CalculateRank(s, unit)
