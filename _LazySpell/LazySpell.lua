@@ -221,7 +221,7 @@ function LazySpell:SPELLCAST_START()
 	self.cast.msg = nil
 	self.cast.spell = nil
 end
-
+--[[
 function LazySpell:ExtractSpell(spell)
 	local s = spell
 	local _, i, r
@@ -237,7 +237,7 @@ function LazySpell:ExtractSpell(spell)
 		return s, r
 	end
 end
-
+]]
 function LazySpell:GetBuffSpellPower()
 	local Spellpower = 0
 	local healmod = 1
@@ -306,7 +306,7 @@ function LazySpell:GetUnitSpellPower(spell, unit)
 	end
 	return targetpower, targetmod
 end	
-
+--[[
 function LazySpell:GetMaxSpellRank(spellName)
     local i = 1;
     local List = {};
@@ -326,12 +326,12 @@ function LazySpell:GetMaxSpellRank(spellName)
     end
 
 end
-
+]]
 function LazySpell:CalculateRank(spell, unit)
 	local Bonus = 0
 	--local max_rank = self:GetMaxSpellRank(spell)
 	local _,_,_,_,_,_,_,max_rank = SC:GetSpellData(spell)
-	self:Debug("Max rank "..max_rank)
+--	self:Debug("Max rank "..max_rank)
 	if self.db.profile[BS[spell]] and max_rank > self.db.profile[BS[spell]] then
 		max_rank = self.db.profile[BS[spell]]
 	end
@@ -367,7 +367,7 @@ function LazySpell:CalculateRank(spell, unit)
 	self.cast.spell = spell
 	self.cast.msg = spell.."(Rank "..result..") - "..GetUnitName(unit).." - Heal: "..heal.." - Deficit: "..healneed, spell
 	
-	self:Debug(self.cast.msg)
+--	self:Debug(self.cast.msg)
 	
 	return result
 end
