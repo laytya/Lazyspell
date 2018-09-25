@@ -9,7 +9,7 @@ LazySpell.cast = {}
 local defaults = {
 	debugging = true,
 	healcoef = 1,
-	healingwave2rank = false,
+	healingwaveminrank = 1,
 	[BS["Healing Wave"]] = 9,
 	[BS["Lesser Healing Wave"]] = 6,
 	[BS["Chain Heal"]] = 3,
@@ -75,14 +75,18 @@ if class == "SHAMAN" then
 			isPercent = false,
 			order = 100,
 		},
-		healingwave2rank = {
-			type = 'toggle',
-			name = L["Min Rank 2 for HW"],
-			desc = L["Use minimum Rank 2 for Healing Wave"],
-			get = function() return LazySpell.db.profile.healingwave2rank end,
-			set = function()
-				LazySpell.db.profile.healingwave2rank = not LazySpell.db.profile.healingwave2rank 
+		healingwaveminrank = {
+			type = 'range',
+			name = L["Min Rank for HW"],
+			desc = L["Use minimum Rank for Healing Wave"],
+			get = function() return LazySpell.db.profile.healingwaveminrank end,
+			set = function(v)
+				LazySpell.db.profile.healingwaveminrank = v
 			end,
+			min = 1,
+			max = 6,
+			step = 1,
+			isPercent = false,
 			order = 105
 		},
 		lesserhealingwave = {
@@ -366,8 +370,8 @@ function LazySpell:CalculateRank(spell, unit)
 	end		
 
 	local minrank = 1
-	if (self.db.profile.healingwave2rank and spell == BS["Healing Wave"]) then
-		minrank =  2
+	if (spell == BS["Healing Wave"]) then
+		minrank =  self.db.profile.healingwaveminrank
 	end
 	
 	local targetpower, targetmod = self:GetUnitSpellPower(spell, unit)
