@@ -1,6 +1,6 @@
 local HealComm 			= AceLibrary("HealComm-1.0")
 local L                 = AceLibrary("AceLocale-2.0"):new("LazySpell")
-local BS                = AceLibrary("Babble-Spell-2.0")
+local BS                = AceLibrary("Babble-Spell-2.2")
 local SC				= AceLibrary("SpellCache-1.0")
 local waterfall 		= AceLibrary("Waterfall-1.0")
 LazySpell = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceConsole-2.0", "AceDebug-2.0", "FuBarPlugin-2.0")
