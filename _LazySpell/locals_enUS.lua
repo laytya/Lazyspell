@@ -8,6 +8,8 @@ L:RegisterTranslations("enUS", function() return {
 	["Open options"] = true ,
 	["Max spell ranks"] = true,
 	["Options for max rank spell to subtitude."] = true,
+	["Overheal ratio"] = true,
+	["Ratio of overheal of spells from 0.1 to 2"] = true,
 	["Healing Wave Max Rank"] = true,
 	["Defines the max rank of Healing Wave spell used by lazyspell."] = true,
 	["Lesser Healing Wave Max Rank"] = true,
@@ -20,5 +22,7 @@ L:RegisterTranslations("enUS", function() return {
 	["Defines the max rank of Flash Heal spell used by lazyspell."] = true,
 	["Greater Heal Max Rank"] = true,
 	["Defines the max rank of Greater Heal spell used by lazyspell."] = true,
+	["Hide minimap icon"] = true,
+	["Lazy Spell Options"] = true,
 
 } end)

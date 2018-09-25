@@ -8,6 +8,7 @@ LazySpell.cast = {}
 
 local defaults = {
 	debugging = true,
+	healcoef = 1,
 	[BS["Healing Wave"]] = 9,
 	[BS["Lesser Healing Wave"]] = 6,
 	[BS["Chain Heal"]] = 3,
@@ -37,7 +38,20 @@ local options = {
 			order = 110,
 			args = {},
 		},
-		
+		healcoef = {
+			type = 'range',
+			name = L["Overheal ratio"],
+			desc = L["Ratio of overheal of spells from 0.1 to 2"],
+			get = function() return LazySpell.db.profile.healcoef end,
+			set = function(v) 
+				LazySpell.db.profile.healcoef = v
+			end,
+			min = 0.1,
+			max = 2,
+			step = 0.1,
+			isPercent = true,
+			order = 100,
+		},
 	},
 }
 local _, class = UnitClass("player")
@@ -165,10 +179,10 @@ function LazySpell:OnInitialize()
 	self.OnMenuRequest.args.detachTooltip.hidden = true
 	self:SetText("Lazy spell")
 	if not FuBar then
-		self.OnMenuRequest.args.hide.guiName = "Hide minimap icon"
-		self.OnMenuRequest.args.hide.desc = "Hide minimap icon"
+		self.OnMenuRequest.args.hide.guiName = L["Hide minimap icon"]
+		self.OnMenuRequest.args.hide.desc = L["Hide minimap icon"]
 	end
-	waterfall:Register('LazySpell', 'aceOptions', options, 'title','Lazy Spell Options')  
+	waterfall:Register('LazySpell', 'aceOptions', options, 'title', L['Lazy Spell Options'])  
 	
 	self.OnClick = function() waterfall:Open('LazySpell') end
 	self.OnMenuRequest = options
@@ -349,7 +363,7 @@ function LazySpell:CalculateRank(spell, unit)
 	local heal = 0
 	for i = max_rank,1,-1 do
 		local amount = ((math.floor(HealComm.Spells[spell][i](Bonus))+targetpower)*buffmod*targetmod)
-		if amount < healneed then
+		if amount < (healneed * self.db.profile.healcoef) then
 			if i < max_rank then
 				result = i + 1
 				heal = ((math.floor(HealComm.Spells[spell][i+1](Bonus))+targetpower)*buffmod*targetmod)
@@ -398,16 +412,16 @@ function LazySpell:CM_CastSpell(spell, unit)
 end
 
 function LazySpell:LunaUF_CastSpellByName_IgnoreSelfCast(spell, unit)
-	self:Debug("LUNA CastSpellByName_IgnoreSelfCast")
+--	self:Debug("LUNA CastSpellByName_IgnoreSelfCast")
 	if not ( type(spell) == "function") then
 		local lunit = (LunaUF.db.profile.mouseover and UnitExists("mouseover") and "mouseover") or (GetMouseFocus() and GetMouseFocus().unit)
 		local rosterUnit = lunit and LunaUF.roster:GetUnitIDFromUnit(lunit)
-		unit = unit or rosterUnit or lunit
+		lunit = unit or rosterUnit or lunit
 	
 	
 		local s,_,_,_,r = SC:GetSpellData(spell)
 		if s and HealComm.Spells[s] and r == 1 then
-			local rank = LazySpell:CalculateRank(s, unit)
+			local rank = LazySpell:CalculateRank(s, lunit)
 			spell = SC:GetSpellNameText(s,rank)
 		end	
 	end
