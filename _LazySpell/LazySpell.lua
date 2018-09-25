@@ -9,6 +9,7 @@ LazySpell.cast = {}
 local defaults = {
 	debugging = true,
 	healcoef = 1,
+	healingwave2rank = false,
 	[BS["Healing Wave"]] = 9,
 	[BS["Lesser Healing Wave"]] = 6,
 	[BS["Chain Heal"]] = 3,
@@ -50,7 +51,7 @@ local options = {
 			max = 2,
 			step = 0.1,
 			isPercent = true,
-			order = 100,
+			order = 130,
 		},
 	},
 }
@@ -73,6 +74,16 @@ if class == "SHAMAN" then
 			step = 1,
 			isPercent = false,
 			order = 100,
+		},
+		healingwave2rank = {
+			type = 'toggle',
+			name = L["Min Rank 2 for HW"],
+			desc = L["Use minimum Rank 2 for Healing Wave"],
+			get = function() return LazySpell.db.profile.healingwave2rank end,
+			set = function()
+				LazySpell.db.profile.healingwave2rank = not LazySpell.db.profile.healingwave2rank 
+			end,
+			order = 105
 		},
 		lesserhealingwave = {
 			type = 'range',
@@ -297,7 +308,7 @@ function LazySpell:GetUnitSpellPower(spell, unit)
 				targetpower = HLBonus + targetpower
 			end
 		end
-		if buffName == BS["Healing Wave"] and spell == BS["Healing Wave"] then
+		if buffName == BS["Healing Way"] and spell == BS["Healing Wave"] then
 			targetmod = targetmod * ((buffApplications * 0.06) + 1)
 		end
 	end
@@ -354,19 +365,26 @@ function LazySpell:CalculateRank(spell, unit)
 		Bonus = tonumber(BonusScanner:GetBonus("HEAL"))
 	end		
 
+	local minrank = 1
+	if (self.db.profile.healingwave2rank and spell == BS["Healing Wave"]) then
+		minrank =  2
+	end
+	
 	local targetpower, targetmod = self:GetUnitSpellPower(spell, unit)
 	local buffpower, buffmod = self:GetBuffSpellPower()
 	local Bonus = Bonus + buffpower	
 	local healneed = UnitHealthMax(unit) - UnitHealth(unit);
 	
-	local result = 1
+	local result = minrank
 	local heal = 0
-	for i = max_rank,1,-1 do
+	for i = max_rank,minrank,-1 do
 		local amount = ((math.floor(HealComm.Spells[spell][i](Bonus))+targetpower)*buffmod*targetmod)
-		if amount < (healneed * self.db.profile.healcoef) then
-			if i < max_rank then
+		if amount < healneed then
+			if (i < max_rank) and ( amount < ( healneed * self.db.profile.healcoef) ) then
+				
 				result = i + 1
 				heal = ((math.floor(HealComm.Spells[spell][i+1](Bonus))+targetpower)*buffmod*targetmod)
+				
 				break
 			else
 				result = i

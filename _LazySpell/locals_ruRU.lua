@@ -12,6 +12,8 @@ L:RegisterTranslations("ruRU", function() return {
 	["Ratio of overheal of spells from 0.1 to 2"] = "Коэфицент оверисцеления для заклинаний от 0.1 (недохисцеление) до 2 (оверисцеление)",
 	["Healing Wave Max Rank"] = "Волна исцеления",
 	["Defines the max rank of Healing Wave spell used by lazyspell."] = "Устанавливает максимальный ранг заклинания Волна исцеления, используемый lazyspell",
+	["Min Rank 2 for HW"] = "Минимум Ранг 2 для ВИ",
+	["Use minimum Rank 2 for Healing Wave"] = "Использовать минимум 2 ранг Волны исцеления",
 	["Lesser Healing Wave Max Rank"] = "Малая волна исцеления",
 	["Defines the max rank of Lesser Healing Wave spell used by lazyspell."] = "Устанавливает максимальный ранг заклинания Малая волна исцеления, используемый lazyspell",
 	["Chain Heal Max Rank"] = "Цепное исцеление",
