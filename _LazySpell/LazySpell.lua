@@ -7,7 +7,7 @@ LazySpell = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceCons
 LazySpell.cast = {}
 
 local defaults = {
-	debugging = true,
+	debugging = false,
 	healcoef = 1,
 	healingwaveminrank = 1,
 	[BS["Healing Wave"]] = 9,
