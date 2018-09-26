@@ -1,6 +1,6 @@
-#LazySpell 1.12.1 WOW
+##LazySpell v0.3 vanilla
 
-LazySpell is addon that provides auto healing spell rank scale for Clique, Classic Mouseover and LUNA (/lunamo) depending on unit health deficit. This means it's compatible with all Unit Frames that are supported by these two addons.
+LazySpell is addon that provides auto healing spell rank scale for Clique, Classic Mouseover and LUNA (/lunamo) depending on unit health deficit. This means it's compatible with all Unit Frames that are supported by these addons.
 
 This addon starts to work when you set up spell with rank 1, all other ranks will be passed unchanged
 
@@ -14,17 +14,16 @@ Thanks to _LazySpell and HealComm other Unit Frames will be able to send these i
 You can setup max ranks. persentage of overheal, minrank in options.
 
 
-## HOWTO Install
+##HOWTO Install
 
 - Extract the archive
 - Copy "_LazySpell" folder into your "\<WOW FOLDER>/Interface/Addons/" directory
 
 
-## What you need to make it work
+##What you need to make it work
 
 - Bonus Scanner(mandatory)
   - mandatory dependancy
-  
 - ClassicMouseover
   - mouseover cast compatible with sRaidFrames
   - macro use example /cmast Flash of Light or with rank selected /cmcast Flash of Light(Rank 1)
@@ -35,5 +34,26 @@ You can setup max ranks. persentage of overheal, minrank in options.
 - ClassicSnowfall(optional)
   - great addon, accelerates key bindings so that they are activated by key press rather than key release
 
+##HOWTO use
 
+Using:
+
+In Luna Unit Frames there are two options: clickcasting or Mausover.
+- Clickcasting. Make bind 1 rank of the desired spell on the selected mouse button.
+- Mausover. Make a macro like /lunamo Healing Wave (Rank 1). Bind macro to the button, move the cursor to the frame of the player and press the button.
+
+Any other addon frame + Clique:
+
+For mouseover functionality need addon Classic Mouseover.
+
+- Сlique: just open the Clique window and click the desired mouse button or its combination on 1 rank of the desired heal spell.
+- For the mouseover - make the macro /cmcast Healing Wave (Rank 1)
+
+Options:
+
+*Overheal Ratio* - Regulates nedoheal-overheal. To avoid overheal or to heal less ranks, use values ​​less than 1.
+
+*Max spell ranks* - The option is responsible for ensuring that the healer does not go out of mana in the raid on long battles. We put the maximum rank of spells that you can afford.
+
+For shamans, there is an option of a minimal Healing Wave rank. Very convenient for setting up the healspam of current tank.
 
