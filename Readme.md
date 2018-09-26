@@ -1,4 +1,4 @@
-##LazySpell v0.3 vanilla
+## LazySpell v0.3 vanilla
 
 LazySpell is addon that provides auto healing spell rank scale for Clique, Classic Mouseover and LUNA (/lunamo) depending on unit health deficit. This means it's compatible with all Unit Frames that are supported by these addons.
 
@@ -14,13 +14,13 @@ Thanks to _LazySpell and HealComm other Unit Frames will be able to send these i
 You can setup max ranks. persentage of overheal, minrank in options.
 
 
-##HOWTO Install
+## HOWTO Install
 
 - Extract the archive
 - Copy "_LazySpell" folder into your "\<WOW FOLDER>/Interface/Addons/" directory
 
 
-##What you need to make it work
+## What you need to make it work
 
 - Bonus Scanner(mandatory)
   - mandatory dependancy
@@ -34,7 +34,7 @@ You can setup max ranks. persentage of overheal, minrank in options.
 - ClassicSnowfall(optional)
   - great addon, accelerates key bindings so that they are activated by key press rather than key release
 
-##HOWTO use
+## HOWTO use
 
 Using:
 
