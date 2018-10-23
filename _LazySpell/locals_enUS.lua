@@ -16,6 +16,8 @@ L:RegisterTranslations("enUS", function() return {
 	["Use minimum Rank for Healing Wave"] = true,
 	["Lesser Healing Wave Max Rank"] = true,
 	["Defines the max rank of Lesser Healing Wave spell used by lazyspell."] = true,
+	["Min Rank for LHW"] = true,
+	["Use minimum Rank for Lesser Healing Wave"] = true,
 	["Chain Heal Max Rank"] = true,
 	["Defines the max rank of Chain Heal spell used by lazyspell."] = true,
 	["Heal Max Rank"] = true,

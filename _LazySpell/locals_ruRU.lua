@@ -16,6 +16,8 @@ L:RegisterTranslations("ruRU", function() return {
 	["Use minimum Rank for Healing Wave"] = "Минимальный ранг Волны исцеления",
 	["Lesser Healing Wave Max Rank"] = "Малая волна исцеления",
 	["Defines the max rank of Lesser Healing Wave spell used by lazyspell."] = "Устанавливает максимальный ранг заклинания Малая волна исцеления, используемый lazyspell",
+	["Min Rank for LHW"] = "Миниммальный Ранг для МВИ",
+	["Use minimum Rank for Lesser Healing Wave"] = "Минимальный ранг Малой волны исцеления",
 	["Chain Heal Max Rank"] = "Цепное исцеление",
 	["Defines the max rank of Chain Heal spell used by lazyspell."] = "Устанавливает максимальный ранг заклинания Цепное исцеление, используемый lazyspell",
 	["Heal Max Rank"] = "Исцеление",

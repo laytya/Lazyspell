@@ -9,9 +9,10 @@ LazySpell.cast = {}
 local defaults = {
 	debugging = false,
 	healcoef = 1,
-	healingwaveminrank = 1,
 	[BS["Healing Wave"]] = 9,
 	[BS["Lesser Healing Wave"]] = 6,
+	[BS["Healing Wave"].."min"] = 1,
+	[BS["Lesser Healing Wave"].."min"] = 1,
 	[BS["Chain Heal"]] = 3,
 	[BS["Heal"]] = 4,
 	[BS["Flash Heal"]] = 6,
@@ -79,9 +80,9 @@ if class == "SHAMAN" then
 			type = 'range',
 			name = L["Min Rank for HW"],
 			desc = L["Use minimum Rank for Healing Wave"],
-			get = function() return LazySpell.db.profile.healingwaveminrank end,
+			get = function() return LazySpell.db.profile[BS["Healing Wave"].."min"] end,
 			set = function(v)
-				LazySpell.db.profile.healingwaveminrank = v
+				LazySpell.db.profile[BS["Healing Wave"].."min"] = v
 			end,
 			min = 1,
 			max = 6,
@@ -103,6 +104,21 @@ if class == "SHAMAN" then
 			isPercent = false,
 			order = 110,
 		},
+		leshealingwaveminrank = {
+			type = 'range',
+			name = L["Min Rank for LHW"],
+			desc = L["Use minimum Rank for Lesser Healing Wave"],
+			get = function() return LazySpell.db.profile[BS["Lesser Healing Wave"].."min"] end,
+			set = function(v)
+				LazySpell.db.profile[BS["Lesser Healing Wave"].."min"] = v
+			end,
+			min = 1,
+			max = 6,
+			step = 1,
+			isPercent = false,
+			order = 115
+		},
+		
 		chainheal = {
 			type = 'range',
 			name = L["Chain Heal Max Rank"],
@@ -370,8 +386,8 @@ function LazySpell:CalculateRank(spell, unit)
 	end		
 
 	local minrank = 1
-	if (spell == BS["Healing Wave"]) then
-		minrank =  self.db.profile.healingwaveminrank
+	if self.db.profile[spell.."min"] ~= nil then
+		minrank	= self.db.profile[spell.."min"]
 	end
 	
 	local targetpower, targetmod = self:GetUnitSpellPower(spell, unit)

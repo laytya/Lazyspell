@@ -1,7 +1,7 @@
 ## Interface: 11200
 ## Title: _LazySpell
 ## Author: Ogrisch, laytya
-## Version: 0.3
+## Version: 0.3a
 ## Notes: Auto spell rank scale for Clique, CM, LUNA
 ## SavedVariables: LazySpellDB
 ## Dependencies: BonusScanner
