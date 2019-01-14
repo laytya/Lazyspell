@@ -30,7 +30,11 @@ L:RegisterTranslations("enUS", function() return {
 	["Lazy Spell Options"] = true,
 	["Healing Touch Max Rank"] = true,
 	["Defines the max rank of Healing Touch spell used by lazyspell."] = true,
+	["Healing Touch Min Rank"] = true,
+	["Defines the min rank of Healing Touch spell used by lazyspell."] = true,
 	["Regrowth Max Rank"] = true,
 	["Defines the max rank of Regrowth spell used by lazyspell."] = true,
+	["Regrowth Min Rank"] = true,
+	["Defines the min rank of Regrowth spell used by lazyspell."] = true,
 
 } end)

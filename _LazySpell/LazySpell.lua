@@ -19,6 +19,8 @@ local defaults = {
 	[BS["Greater Heal"]] = 5,
 	[BS["Healing Touch"]] = 11,
 	[BS["Regrowth"]] = 9,
+	[BS["Healing Touch"].."min"] = 1,
+	[BS["Regrowth"].."min"] = 1,
 }
 
 local options = {
@@ -204,6 +206,20 @@ elseif class == "DRUID" then
 			isPercent = false,
 			order = 100,
 		},
+		healingtouchmin = {
+			type = 'range',
+			name = L["Healing Touch Min Rank"],
+			desc = L["Defines the min rank of Healing Touch spell used by lazyspell."],
+			get = function() return LazySpell.db.profile[BS["Healing Touch"].."min"] end,
+			set = function(v) 
+				LazySpell.db.profile[BS["Healing Touch"].."min"] = v
+			end,
+			min = 1,
+			max = 11,
+			step = 1,
+			isPercent = false,
+			order = 110,
+		},
 		regrowth = {
 			type = 'range',
 			name = L["Regrowth Max Rank"],
@@ -216,7 +232,21 @@ elseif class == "DRUID" then
 			max = 9,
 			step = 1,
 			isPercent = false,
-			order = 100,
+			order = 120,
+		},
+		regrowthmin = {
+			type = 'range',
+			name = L["Regrowth Min Rank"],
+			desc = L["Defines the min rank of Regrowth spell used by lazyspell."],
+			get = function() return LazySpell.db.profile[BS["Regrowth"].."min"] end,
+			set = function(v) 
+				LazySpell.db.profile[BS["Regrowth"].."min"] = v
+			end,
+			min = 1,
+			max = 9,
+			step = 1,
+			isPercent = false,
+			order = 130,
 		},
 	}
 end
