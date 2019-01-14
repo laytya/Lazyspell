@@ -17,6 +17,8 @@ local defaults = {
 	[BS["Heal"]] = 4,
 	[BS["Flash Heal"]] = 6,
 	[BS["Greater Heal"]] = 5,
+	[BS["Healing Touch"]] = 11,
+	[BS["Regrowth"]] = 9,
 }
 
 local options = {
@@ -180,6 +182,38 @@ elseif class == "PRIEST" then
 			end,
 			min = 1,
 			max = 5,
+			step = 1,
+			isPercent = false,
+			order = 100,
+		},
+	}
+elseif class == "DRUID" then
+	
+	options.args.maxspellranks.args = {
+		healingtouch = {
+			type = 'range',
+			name = L["Healing Touch Max Rank"],
+			desc = L["Defines the max rank of Healing Touch spell used by lazyspell."],
+			get = function() return LazySpell.db.profile[BS["Healing Touch"]] end,
+			set = function(v) 
+				LazySpell.db.profile[BS["Healing Touch"]] = v
+			end,
+			min = 1,
+			max = 11,
+			step = 1,
+			isPercent = false,
+			order = 100,
+		},
+		regrowth = {
+			type = 'range',
+			name = L["Regrowth Max Rank"],
+			desc = L["Defines the max rank of Regrowth spell used by lazyspell."],
+			get = function() return LazySpell.db.profile[BS["Regrowth"]] end,
+			set = function(v) 
+				LazySpell.db.profile[BS["Regrowth"]] = v
+			end,
+			min = 1,
+			max = 9,
 			step = 1,
 			isPercent = false,
 			order = 100,

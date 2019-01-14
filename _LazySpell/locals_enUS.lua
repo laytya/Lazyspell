@@ -28,5 +28,9 @@ L:RegisterTranslations("enUS", function() return {
 	["Defines the max rank of Greater Heal spell used by lazyspell."] = true,
 	["Hide minimap icon"] = true,
 	["Lazy Spell Options"] = true,
+	["Healing Touch Max Rank"] = true,
+	["Defines the max rank of Healing Touch spell used by lazyspell."] = true,
+	["Regrowth Max Rank"] = true,
+	["Defines the max rank of Regrowth spell used by lazyspell."] = true,
 
 } end)

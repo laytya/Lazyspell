@@ -28,4 +28,8 @@ L:RegisterTranslations("ruRU", function() return {
 	["Defines the max rank of Greater Heal spell used by lazyspell."] = "Устанавливает максимальный ранг заклинания Великое исцеление, используемый lazyspell",
 	["Hide minimap icon"] = "Спрятать иконку у миникарты",
 	["Lazy Spell Options"] = "Настройки Lazy Spell",
+	["Healing Touch Max Rank"] = true,
+	["Defines the max rank of Healing Touch spell used by lazyspell."] = true,
+	["Regrowth Max Rank"] = true,
+	["Defines the max rank of Regrowth spell used by lazyspell."] = true,
 } end)
