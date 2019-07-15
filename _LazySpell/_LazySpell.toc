@@ -3,6 +3,7 @@
 ## Author: Ogrisch, laytya
 ## Version: 0.3b
 ## Notes: Auto spell rank scale for Clique, CM, LUNA
+## Notes-ruRU: Авто-уровни заклинаний для Clique, CM, LUNA
 ## SavedVariables: LazySpellDB
 ## Dependencies: BonusScanner
 ## OptionalDeps: Ace2, DewdropLib
@@ -30,6 +31,7 @@ libs\FuBarPlugin-2.0\FuBarPlugin-2.0.lua
 libs\Waterfall-1.0\Waterfall-1.0.lua
 
 locals_enUS.lua
+locals_ruRU.lua
 LazySpell.lua
 
 
