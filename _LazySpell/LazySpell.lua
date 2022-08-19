@@ -309,7 +309,7 @@ end
 LazySpell.BOL = {
 ["enUS"] = "Receives up to (%d+) extra healing from Holy Light spells%, and up to (%d+) extra healing from Flash of Light spells%.",
 ["deDE"] = "Erh�lt bis zu (%d+) extra Heilung durch %'Heiliges Licht%' und bis zu (%d+) extra Heilung durch den Zauber %'Lichtblitz%'%.",
-["frFR"] = "Les sorts de Lumiere sacr�e rendent jusqu%'a (%d+) points de vie suppl�mentaires%, les sorts d%'Eclair lumineux jusqu%'a (%d+)%."
+["frFR"] = "Les sorts de Lumiere sacr�e rendent jusqu%'a (%d+) points de vie suppl�mentaires%, les sorts d%'Eclair lumineux jusqu%'a (%d+)%.",
 ["ruRU"] = "Благословляет дружественную цель, усиливая эффект применяемого к ней заклинания \"Свет небес\" на величину до (%d+) ед., а заклинания \"Вспышка Света\" – на величину до (%d+) ед%." --not tested
 }
 
