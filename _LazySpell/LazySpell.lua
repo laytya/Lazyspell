@@ -1,7 +1,8 @@
 local HealComm 			= AceLibrary("HealComm-1.0")
-local L                 = AceLibrary("AceLocale-2.0"):new("LazySpell")
+local L                 = AceLibrary("AceLocale-2.2"):new("LazySpell")
 local BS                = AceLibrary("Babble-Spell-2.2")
 local SC				= AceLibrary("SpellCache-1.0")
+local dewdrop 			= AceLibrary("Dewdrop-2.0")
 local waterfall 		= AceLibrary("Waterfall-1.0")
 LazySpell = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceConsole-2.0", "AceDebug-2.0", "FuBarPlugin-2.0")
 LazySpell.cast = {}
@@ -23,11 +24,15 @@ local defaults = {
 	[BS["Regrowth"].."min"] = 1,
 }
 
+local hcolor = "|cFF77BBFF"
+local greycolor = "|cFFCCCCCC"
+
 local options = {
 	type = 'group',
 	icon = 'Interface\\AddOns\\_LazySpell\\Icon',
+	name = 'LazySpell',
 	args = {
-		menu = {
+	--[[	menu = {
 			type = 'execute',
 			name = L["Options"],
 			desc = L["Open options"],
@@ -37,26 +42,20 @@ local options = {
 			order = 100,
 		},
 		spacer = { type = "header", order = 102 },
+	]]
 		maxspellranks = {
 			type = 'group',
-			name = L["Max spell ranks"],
-			desc = L["Options for max rank spell to subtitude."],
+			name = hcolor .. L["Spell options"],
+			desc = L["Options for min\max rank spell to subtitude and overheal coef."],
 			order = 110,
-			args = {},
+args = {
+				
+			},
 		},
-		healcoef = {
-			type = 'range',
-			name = L["Overheal ratio"],
-			desc = L["Ratio of overheal of spells from 0.1 to 2"],
-			get = function() return LazySpell.db.profile.healcoef end,
-			set = function(v) 
-				LazySpell.db.profile.healcoef = v
-			end,
-			min = 0.1,
-			max = 2,
-			step = 0.1,
-			isPercent = true,
-			order = 130,
+		
+		fubar = { 
+				type = "group", name = greycolor .. L["Fubar plugin"], desc = L["Fubar plugin options."], order=-15,
+				args = {}
 		},
 	},
 }
@@ -251,6 +250,20 @@ elseif class == "DRUID" then
 	}
 end
 
+options.args.maxspellranks.args.healcoef = {
+	type = 'range',
+	name = L["Overheal ratio"],
+	desc = L["Ratio of overheal of spells from 0.1 to 2"],
+	get = function() return LazySpell.db.profile.healcoef end,
+	set = function(v) 
+		LazySpell.db.profile.healcoef = v
+	end,
+	min = 0.1,
+	max = 2,
+	step = 0.1,
+	isPercent = true,
+	order = 130,
+}
 
 -- stuff for FuBar:
 
@@ -268,6 +281,14 @@ LazySpell.hasNoColor = true
 function LazySpell:OnInitialize()
 	self:RegisterDB("LazySpellDB")
 	self:RegisterDefaults('profile', defaults )
+	
+	
+	t = AceLibrary("FuBarPlugin-2.0"):GetAceOptionsDataTable(LazySpell)
+	for k,v in pairs(t) do
+		if not options.args.fubar.args[k] then	options.args.fubar.args[k] = v	end
+	end
+	
+	
 	self:RegisterChatCommand({'/lspellcl'}, options )
 	self.OnMenuRequest = options
 	self.OnMenuRequest.args.lockTooltip.hidden = true
@@ -281,21 +302,27 @@ function LazySpell:OnInitialize()
 	
 	self.OnClick = function() waterfall:Open('LazySpell') end
 	self.OnMenuRequest = options
-		
+	dewdrop:InjectAceOptionsTable(self, self.OnMenuRequest)	
 end
-
 
 
 LazySpell.BOL = {
 ["enUS"] = "Receives up to (%d+) extra healing from Holy Light spells%, and up to (%d+) extra healing from Flash of Light spells%.",
-["deDE"] = "Erhält bis zu (%d+) extra Heilung durch %'Heiliges Licht%' und bis zu (%d+) extra Heilung durch den Zauber %'Lichtblitz%'%.",
-["frFR"] = "Les sorts de Lumiere sacrée rendent jusqu%'a (%d+) points de vie supplémentaires%, les sorts d%'Eclair lumineux jusqu%'a (%d+)%."
+["deDE"] = "Erhï¿½lt bis zu (%d+) extra Heilung durch %'Heiliges Licht%' und bis zu (%d+) extra Heilung durch den Zauber %'Lichtblitz%'%.",
+["frFR"] = "Les sorts de Lumiere sacrï¿½e rendent jusqu%'a (%d+) points de vie supplï¿½mentaires%, les sorts d%'Eclair lumineux jusqu%'a (%d+)%."
 }
 
-
+local fubarOptions = { "detachTooltip", "colorText", "text", "lockTooltip", "position", "minimapAttach", "hide", "icon" }
 
 function LazySpell:OnEnable()
 	DEFAULT_CHAT_FRAME:AddMessage("_Lazy Spell by ".."|cffFF0066".."Ogrisch".."|cffffffff".. " loaded")
+	
+	for k,v in fubarOptions do
+		if self.OnMenuRequest.args[v] then 
+			self.OnMenuRequest.args[v].hidden = true
+		end
+	end
+	
 	if Clique then
 		Clique.CastSpell_OLD = Clique.CastSpell
 		Clique.CastSpell = self.Clique_CastSpell
@@ -487,29 +514,24 @@ function LazySpell:CalculateRank(spell, unit)
 	
 	return result
 end
-
-function LazySpell:Clique_CastSpell(spell, unit)
+function LazySpell:ValidateSpell(spell,unit)
 	local s,_,_,_,r = SC:GetSpellData(spell)
---	LazySpell:ExtractSpell(spell)
-	
-	unit = unit or Clique.unit
 	if s and HealComm.Spells[s] and r == 1 then
 		local rank = LazySpell:CalculateRank(s, unit)
-		spell =  SC:GetSpellNameText(s,rank)
-		
-		
+		return SC:GetSpellNameText(s,rank)
 	end	
---	self:Debug(spell)
+	return spell
+end
+function LazySpell:Clique_CastSpell(spell, unit)
+	
+	unit = unit or Clique.unit
+	spell = LazySpell:ValidateSpell(spell,unit)
 	
 	Clique:CastSpell_OLD(spell, unit)
 end
 
 function LazySpell:CM_CastSpell(spell, unit)
-	local s,_,_,_,r = SC:GetSpellData(spell)
-	if s and HealComm.Spells[s] and r == 1 then
-		local rank = LazySpell:CalculateRank(s, unit)
-		spell = SC:GetSpellNameText(s,rank)
-	end	
+	spell = LazySpell:ValidateSpell(spell,unit)
 	CM:CastSpell_OLD(spell, unit)
 end
 
@@ -519,13 +541,7 @@ function LazySpell:LunaUF_CastSpellByName_IgnoreSelfCast(spell, unit)
 		local lunit = (LunaUF.db.profile.mouseover and UnitExists("mouseover") and "mouseover") or (GetMouseFocus() and GetMouseFocus().unit)
 		local rosterUnit = lunit and LunaUF.roster:GetUnitIDFromUnit(lunit)
 		lunit = unit or rosterUnit or lunit
-	
-	
-		local s,_,_,_,r = SC:GetSpellData(spell)
-		if s and HealComm.Spells[s] and r == 1 then
-			local rank = LazySpell:CalculateRank(s, lunit)
-			spell = SC:GetSpellNameText(s,rank)
-		end	
+		spell = LazySpell:ValidateSpell(spell,lunit)
 	end
 	LunaUF:CastSpellByName_IgnoreSelfCast_OLD(spell, unit)
 end

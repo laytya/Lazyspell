@@ -1,13 +1,13 @@
 
 
-local L = AceLibrary("AceLocale-2.0"):new("LazySpell")
+local L = AceLibrary("AceLocale-2.2"):new("LazySpell")
 
 L:RegisterTranslations("enUS", function() return {
 
 	["Options"] = true,
 	["Open options"] = true ,
-	["Max spell ranks"] = true,
-	["Options for max rank spell to subtitude."] = true,
+	["Spell options"] = true,
+	["Options for min\max rank spell to subtitude and overheal coef."] = true,
 	["Overheal ratio"] = true,
 	["Ratio of overheal of spells from 0.1 to 2"] = true,
 	["Healing Wave Max Rank"] = true,
@@ -36,5 +36,7 @@ L:RegisterTranslations("enUS", function() return {
 	["Defines the max rank of Regrowth spell used by lazyspell."] = true,
 	["Regrowth Min Rank"] = true,
 	["Defines the min rank of Regrowth spell used by lazyspell."] = true,
+	["Fubar plugin"] = true,
+	["Fubar plugin options."] = true,
 
 } end)
