@@ -337,6 +337,11 @@ function LazySpell:OnEnable()
 		LunaUF.CastSpellByName_IgnoreSelfCast = self.LunaUF_CastSpellByName_IgnoreSelfCast
 	end
 	
+	if pfUI and pfUI.uf then
+		pfUI.uf.ClickAction_old = pfUI.uf.ClickAction
+		pfUI.uf.ClickAction = self.pfUI_uf_ClickAction
+	end
+	
 	self:RegisterEvent("SPELLCAST_START")
 	self.debugging = self:IsDebugging()
 	
@@ -546,3 +551,21 @@ function LazySpell:LunaUF_CastSpellByName_IgnoreSelfCast(spell, unit)
 	LunaUF:CastSpellByName_IgnoreSelfCast_OLD(spell, unit)
 end
 
+function LazySpell:pfUI_uf_ClickAction(button)
+	local label = this.label or ""
+	local id = this.id or ""
+	local unitstr = label .. id
+	local modstring = ""
+	modstring = IsAltKeyDown() and modstring.."alt" or modstring
+	modstring = IsControlKeyDown() and modstring.."ctrl" or modstring
+	modstring = IsShiftKeyDown() and modstring.."shift" or modstring
+	modstring = modstring..button
+	local oldspell = this.clickactions[modstring]
+	if this.clickactions and this.clickactions[modstring] then
+		if not (string.find(this.clickactions[modstring], "^menu") or string.find(this.clickactions[modstring], "^target") or string.find(this.clickactions[modstring], "^%/(.+)")) then
+			this.clickactions[modstring] = LazySpell:ValidateSpell(this.clickactions[modstring],unitstr)
+		end
+	end
+	pfUI.uf:ClickAction_old(button)
+	this.clickactions[modstring] = oldspell
+end

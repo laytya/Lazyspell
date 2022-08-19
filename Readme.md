@@ -1,11 +1,12 @@
-## LazySpell v0.3 vanilla
+## LazySpell v0.4 vanilla
 
-LazySpell is addon that provides auto healing spell rank scale for Clique, Classic Mouseover and LUNA (/lunamo) depending on unit health deficit. This means it's compatible with all Unit Frames that are supported by these addons.
+LazySpell is addon that provides auto healing spell rank scale for Clique, Classic Mouseover, pfUI and LUNA (/lunamo) depending on unit health deficit. This means it's compatible with all Unit Frames that are supported by these addons.
 
 This addon starts to work when you set up spell with rank 1, all other ranks will be passed unchanged
 
 - Clique: set up by addon GUI
 - CM: set up by executable macro like /cmcast Flash of Light(Rank 1)
+- pfUI: set up by addon GUI
 - LUNA: set up by executable macro like /lunamo Flash of Light(Rank 1)
 
 I decided to include HealComm made by Aviana and fixed by Relapsed to improve communications between addons like LUF and SRF Improved v0.90 - full support(send/receive data about resurrections and incomming heals).
@@ -48,6 +49,9 @@ For mouseover functionality need addon Classic Mouseover.
 
 - Сlique: just open the Clique window and click the desired mouse button or its combination on 1 rank of the desired heal spell.
 - For the mouseover - make the macro **/cmcast Healing Wave (Rank 1)**
+
+In pfUI :
+- Configure clickcast of rank 1 spells in /pfui -> Unit Frames -> Click Casting
 
 Options:
 
