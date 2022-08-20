@@ -309,7 +309,8 @@ end
 LazySpell.BOL = {
 ["enUS"] = "Receives up to (%d+) extra healing from Holy Light spells%, and up to (%d+) extra healing from Flash of Light spells%.",
 ["deDE"] = "Erh�lt bis zu (%d+) extra Heilung durch %'Heiliges Licht%' und bis zu (%d+) extra Heilung durch den Zauber %'Lichtblitz%'%.",
-["frFR"] = "Les sorts de Lumiere sacr�e rendent jusqu%'a (%d+) points de vie suppl�mentaires%, les sorts d%'Eclair lumineux jusqu%'a (%d+)%."
+["frFR"] = "Les sorts de Lumiere sacr�e rendent jusqu%'a (%d+) points de vie suppl�mentaires%, les sorts d%'Eclair lumineux jusqu%'a (%d+)%.",
+["ruRU"] = "Благословляет дружественную цель, усиливая эффект применяемого к ней заклинания \"Свет небес\" на величину до (%d+) ед., а заклинания \"Вспышка Света\" – на величину до (%d+) ед%." --not tested
 }
 
 local fubarOptions = { "detachTooltip", "colorText", "text", "lockTooltip", "position", "minimapAttach", "hide", "icon" }
@@ -473,8 +474,8 @@ function LazySpell:CalculateRank(spell, unit)
 	--local max_rank = self:GetMaxSpellRank(spell)
 	local _,_,_,_,_,_,_,max_rank = SC:GetSpellData(spell)
 --	self:Debug("Max rank "..max_rank)
-	if self.db.profile[BS[spell]] and max_rank > self.db.profile[BS[spell]] then
-		max_rank = self.db.profile[BS[spell]]
+	if self.db.profile[spell] and max_rank > self.db.profile[spell] then
+		max_rank = self.db.profile[spell]
 	end
 	
 	if BonusScanner then
