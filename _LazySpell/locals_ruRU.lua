@@ -38,19 +38,4 @@ L:RegisterTranslations("ruRU", function() return {
 	["Defines the min rank of Regrowth spell used by lazyspell."] = "Устанавливает минимальный ранг заклинания Восстановление, используемый lazyspell",
 	["Fubar plugin"] = "Fubar плугин",
 	["Fubar plugin options."] = "Настройка Fubar плугина",
-	
-	--[[
-	--SPELLS NAME
-	["Healing Wave"] = "Волна исцеления",
-	["Lesser Healing Wave"] = "Малая волна исцеления",
-	["Chain Heal"] = "Цепное исцеление",
-	["Heal"] = "Исцеление",
-	["Flash Heal"] = "Быстрое исцеление",
-	["Greater Heal"] = "Великое исцеление",
-	["Healing Touch"] = "Целительное прикосновение",
-	["Regrowth"] = "Восстановление",
-	["Flash of Light"] = "Вспышка Света",
-	["Holy Light"] = "Свет небес",
-	["Healing Way"] = "Путь исцеления",
-	--]]
 } end)

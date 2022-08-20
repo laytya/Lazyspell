@@ -528,6 +528,16 @@ function LazySpell:ValidateSpell(spell,unit)
 	end	
 	return spell
 end
+
+function LazySpell:GetSmartSpell(spell,unit)
+	
+	if spell and HealComm.Spells[spell] then
+		local rank = LazySpell:CalculateRank(spell, unit)
+		return rank
+	end
+	return nil
+end
+
 function LazySpell:Clique_CastSpell(spell, unit)
 	
 	unit = unit or Clique.unit
