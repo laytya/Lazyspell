@@ -5,7 +5,6 @@
 ## Notes: Auto spell rank scale for Clique, CM, LUNA
 ## Notes-ruRU: Авто-уровни заклинаний для Clique, CM, LUNA
 ## SavedVariables: LazySpellDB
-## Dependencies: BonusScanner
 ## OptionalDeps: Ace2, DewdropLib
 
 
