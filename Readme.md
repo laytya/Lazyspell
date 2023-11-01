@@ -23,8 +23,6 @@ You can setup max ranks. persentage of overheal, minrank in options.
 
 ## What you need to make it work
 
-- Bonus Scanner(mandatory)
-  - mandatory dependancy
 - ClassicMouseover
   - mouseover cast compatible with sRaidFrames
   - macro use example **/cmast Flash of Light** or with rank selected **/cmcast Flash of Light(Rank 1)**

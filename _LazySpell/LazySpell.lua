@@ -4,6 +4,7 @@ local BS                = AceLibrary("Babble-Spell-2.2")
 local SC				= AceLibrary("SpellCache-1.0")
 local dewdrop 			= AceLibrary("Dewdrop-2.0")
 local waterfall 		= AceLibrary("Waterfall-1.0")
+local itembonuslib 		= AceLibrary("ItemBonusLib-1.0")
 LazySpell = AceLibrary("AceAddon-2.0"):new("AceEvent-2.0", "AceDB-2.0", "AceConsole-2.0", "AceDebug-2.0", "FuBarPlugin-2.0")
 LazySpell.cast = {}
 
@@ -478,9 +479,7 @@ function LazySpell:CalculateRank(spell, unit)
 		max_rank = self.db.profile[spell]
 	end
 	
-	if BonusScanner then
-		Bonus = tonumber(BonusScanner:GetBonus("HEAL"))
-	end		
+	Bonus = tonumber(itembonuslib:GetBonus("HEAL"))
 
 	local minrank = 1
 	if self.db.profile[spell.."min"] ~= nil then
