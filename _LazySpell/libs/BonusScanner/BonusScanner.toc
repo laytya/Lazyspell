@@ -1,9 +1,0 @@
-## Interface: 11200
-## Title: BonusScanner
-## Notes: Scans your Equipment for cumulative item bonuses and sums them up.
-## Notes-ruRU: Сканирует вашу экипировку, бонусы от предметов и суммирует их значения.
-## Notes-deDE: Durchsucht die Ausrüstung nach Gegenstandboni und zählt diese zusammen.
-## Author: crowley@headshot.de
-## Version: 1.2
-
-BonusScanner.xml

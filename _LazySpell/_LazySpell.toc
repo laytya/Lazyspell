@@ -12,7 +12,6 @@
 
 
 #libs\FAIAP.lua
-#libs\BonusScanner\BonusScanner.xml
 libs\AceLibrary\AceLibrary.lua
 libs\AceOO-2.0\AceOO-2.0.lua
 libs\AceHook-2.1\AceHook-2.1.lua
